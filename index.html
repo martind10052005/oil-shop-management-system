@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Oil Shop Management System</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="page-shell">
+      <aside class="sidebar">
+        <div class="brand-box">
+          <div class="brand-mark">O</div>
+          <div>
+            <h1>Oil Shop</h1>
+            <p>Management</p>
+          </div>
+        </div>
+
+        <nav class="nav-menu">
+          <a href="#dashboard">Dashboard</a>
+          <a href="#products">Products</a>
+          <a href="#purchases">Purchases</a>
+          <a href="#sales">Sales</a>
+          <a href="#reports">Reports</a>
+        </nav>
+      </aside>
+
+      <main class="main-content">
+        <header class="topbar">
+          <div>
+            <span class="eyebrow">Business overview</span>
+            <h2>Oil Shop Management System</h2>
+          </div>
+          <button class="primary-btn" id="reset-data">Reset sample data</button>
+        </header>
+
+        <section id="dashboard" class="panel">
+          <div class="stats-grid">
+            <div class="stat-card accent">
+              <span>Total Products</span>
+              <strong id="total-products">0</strong>
+            </div>
+            <div class="stat-card blue">
+              <span>Stock in Hand</span>
+              <strong id="total-stock">0L</strong>
+            </div>
+            <div class="stat-card green">
+              <span>Total Revenue</span>
+              <strong id="total-revenue">$0</strong>
+            </div>
+            <div class="stat-card orange">
+              <span>Net Profit</span>
+              <strong id="total-profit">$0</strong>
+            </div>
+          </div>
+        </section>
+
+        <section class="content-grid">
+          <div id="products" class="panel">
+            <div class="section-header">
+              <h3>Product Catalog</h3>
+            </div>
+
+            <form id="product-form" class="stack-form">
+              <div class="field-row">
+                <label>
+                  <span>Product name</span>
+                  <input type="text" id="product-name" required />
+                </label>
+                <label>
+                  <span>Category</span>
+                  <input type="text" id="product-category" required />
+                </label>
+              </div>
+
+              <div class="field-row">
+                <label>
+                  <span>Purchase price</span>
+                  <input type="number" id="purchase-price" min="0" step="0.01" required />
+                </label>
+                <label>
+                  <span>Selling price</span>
+                  <input type="number" id="selling-price" min="0" step="0.01" required />
+                </label>
+              </div>
+
+              <div class="field-row">
+                <label>
+                  <span>Stock</span>
+                  <input type="number" id="product-stock" min="0" step="1" required />
+                </label>
+                <label>
+                  <span>Supplier</span>
+                  <input type="text" id="product-supplier" required />
+                </label>
+              </div>
+
+              <button type="submit" class="primary-btn">Add Product</button>
+            </form>
+
+            <div class="table-wrap">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Product</th>
+                    <th>Category</th>
+                    <th>Price</th>
+                    <th>Stock</th>
+                    <th>Supplier</th>
+                  </tr>
+                </thead>
+                <tbody id="product-table-body"></tbody>
+              </table>
+            </div>
+          </div>
+
+          <div id="purchases" class="panel">
+            <div class="section-header">
+              <h3>Stock Purchase</h3>
+            </div>
+
+            <form id="purchase-form" class="stack-form smaller-gap">
+              <label>
+                <span>Product</span>
+                <select id="purchase-product" required></select>
+              </label>
+
+              <div class="field-row">
+                <label>
+                  <span>Quantity</span>
+                  <input type="number" id="purchase-quantity" min="1" step="1" required />
+                </label>
+                <label>
+                  <span>Unit Cost</span>
+                  <input type="number" id="purchase-unit-cost" min="0" step="0.01" required />
+                </label>
+              </div>
+
+              <label>
+                <span>Supplier</span>
+                <input type="text" id="purchase-supplier" required />
+              </label>
+
+              <button type="submit" class="primary-btn">Record Purchase</button>
+            </form>
+
+            <div class="table-wrap compact">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Date</th>
+                    <th>Product</th>
+                    <th>Qty</th>
+                    <th>Cost</th>
+                  </tr>
+                </thead>
+                <tbody id="purchase-table-body"></tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+        <section class="content-grid bottom-grid">
+          <div id="sales" class="panel">
+            <div class="section-header">
+              <h3>Sales Entry</h3>
+            </div>
+
+            <form id="sale-form" class="stack-form smaller-gap">
+              <label>
+                <span>Product</span>
+                <select id="sale-product" required></select>
+              </label>
+
+              <div class="field-row">
+                <label>
+                  <span>Quantity</span>
+                  <input type="number" id="sale-quantity" min="1" step="1" required />
+                </label>
+                <label>
+                  <span>Customer</span>
+                  <input type="text" id="sale-customer" value="Walk-in Customer" required />
+                </label>
+              </div>
+
+              <button type="submit" class="primary-btn">Record Sale</button>
+            </form>
+
+            <div class="table-wrap compact">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Date</th>
+                    <th>Product</th>
+                    <th>Qty</th>
+                    <th>Total</th>
+                    <th>Customer</th>
+                  </tr>
+                </thead>
+                <tbody id="sales-table-body"></tbody>
+              </table>
+            </div>
+          </div>
+
+          <div id="reports" class="panel">
+            <div class="section-header">
+              <h3>Inventory Alerts</h3>
+            </div>
+
+            <div class="table-wrap compact">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Product</th>
+                    <th>Stock</th>
+                    <th>Status</th>
+                  </tr>
+                </thead>
+                <tbody id="inventory-table-body"></tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <script src="app.js"></script>
+  </body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
